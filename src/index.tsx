@@ -1,13 +1,11 @@
-const HomePage = () => {
-    return (
-        <>
-            <header>
-                <div>
-                    <h1>Teste</h1>
-                </div>
-            </header>
-        </>
-    );
-};
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import './global.css' // Importa os estilos do Tailwind
+import App from './pages/home'
 
-export default HomePage; 
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
+)

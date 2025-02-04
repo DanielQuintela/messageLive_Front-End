@@ -1,13 +1,13 @@
-import HomePage from "../..";
+import App from "../home";
 
 
-HomePage()
+App()
 
 const Chat = () => {
     return (
         <div>
             <h1>Bem-vindo ao Chat</h1>
-            <HomePage></HomePage>
+            <App></App>
         </div>
     );
 };
