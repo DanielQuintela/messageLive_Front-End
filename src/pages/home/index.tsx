@@ -1,10 +1,24 @@
 import { useState } from 'react';
 import './index.css';
+import { useNavigate } from 'react-router-dom';
 
 
-function App() {
+function Home() {
   const [tela, setTela] = useState<"inicio" | "askName">("inicio");
   const [nome, setNome] = useState("");
+  const navigate = useNavigate();
+
+  const handleToLobby = () =>{
+  
+    
+    if (nome) {
+     alert(`Bem-vindo ao lobby, ${nome}!`)
+     navigate(`/lobby?nome=${encodeURIComponent(nome)}`);
+    } else {
+      alert("Por favor, digite seu nome antes de entrar!"); // Evita que entre sem nome
+    }
+
+  }
 
     return (
       <>
@@ -56,10 +70,11 @@ function App() {
                 placeholder="Digite seu nome aqui"
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
+                required
               />
               <button
                 className="mt-7 px-4 py-3 h-12 bg-purple-950 hover:bg-purple-900 text-white font-bold rounded-lg transition-all duration-300 text-xl"
-                onClick={() => alert(`Bem-vindo ao lobby, ${nome}!`)}
+                onClick={handleToLobby}
               >
                 Entrar no lobby
               </button>
@@ -68,7 +83,7 @@ function App() {
 
         </div>
       </>
-    )
+    );
 }
 
-export default App;
+export default Home;

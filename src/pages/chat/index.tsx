@@ -12,4 +12,4 @@ const Chat = () => {
     );
 };
 
-export default Chat; // <-- Exportação para torná-lo um módulo
+export default Chat; 
