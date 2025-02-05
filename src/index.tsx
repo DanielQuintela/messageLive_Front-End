@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './global.css' // Importa os estilos do Tailwind
+import './global.css' 
 import App from './pages/home'
 
 
