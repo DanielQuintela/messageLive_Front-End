@@ -1,18 +1,22 @@
 import { useState } from 'react';
 import './index.css';
 import { useNavigate } from 'react-router-dom';
+import { useUser } from '../../hooks/UserContext';
+
 
 
 function Home() {
   const [tela, setTela] = useState<"inicio" | "askName">("inicio");
-  const [nome, setNome] = useState("");
+  const [inputNome, setInputNome] = useState("");
+  const { socket } = useUser();
   const navigate = useNavigate();
 
   const handleToLobby = () =>{
   
    
-    if (nome) {
-      navigate(`/lobby?nome=${encodeURIComponent(nome)}`);
+    if (inputNome) {
+      socket.emit("join", inputNome)
+      navigate(`/lobby`);
     } else {
       alert("Por favor, digite seu nome antes de entrar!"); // Evita que entre sem nome
     }
@@ -20,7 +24,7 @@ function Home() {
   }
     return (
       <>
-
+        
         <div className="flex flex-col items-center justify-center bg-gray-900 text-white text-center transition-all duration-500 overflow-y-auto h-screen">
          
           {tela === "inicio" && (
@@ -63,8 +67,8 @@ function Home() {
                 type="text"
                 className="mt-4 p-3 text-black rounded-lg w-64 h-11"
                 placeholder="Digite seu nome aqui"
-                value={nome}
-                onChange={(e) => setNome(e.target.value)}
+                value={inputNome}
+                onChange={(e) => setInputNome(e.target.value)}
                 required
               />
               <button
