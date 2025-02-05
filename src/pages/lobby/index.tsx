@@ -1,10 +1,20 @@
+import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Lobby() {
   const navigate = useNavigate();
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const nome = params.get("nome") || "Usuário";
+  let acces = 0
+
+  useEffect(() => {
+    if (acces < 1){
+      toast.success(`Seja Bem-vindo, ${nome}!`);
+      acces++ 
+    }
+  }, [nome, acces]);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white text-center">

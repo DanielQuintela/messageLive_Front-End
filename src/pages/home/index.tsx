@@ -10,22 +10,16 @@ function Home() {
 
   const handleToLobby = () =>{
   
-    
+   
     if (nome) {
-     alert(`Bem-vindo ao lobby, ${nome}!`)
-     navigate(`/lobby?nome=${encodeURIComponent(nome)}`);
+      navigate(`/lobby?nome=${encodeURIComponent(nome)}`);
     } else {
       alert("Por favor, digite seu nome antes de entrar!"); // Evita que entre sem nome
     }
-
+   
   }
-
     return (
       <>
-       <header className="bg-black/70 p-3 absolute top-0 left-0 w-full flex items-center justify-between">
-        <h1 className="text-[#ffffff] ml-3  lg:text-2xl">MessageLive</h1>
-        {/* <img src="messageLiveLogo.png" className="w-40 h-36 rounded-tl-3xl" alt='Imagem da logo' /> */}
-        </header>
 
         <div className="flex flex-col items-center justify-center bg-gray-900 text-white text-center transition-all duration-500 overflow-y-auto h-screen">
          
@@ -47,6 +41,7 @@ function Home() {
                     <rect x="0" y="0" fill="none" width="100%" height="100%" />
                   </svg>
                 </button>
+        
               </div>
             </div>
           )}
