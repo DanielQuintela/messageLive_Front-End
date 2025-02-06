@@ -12,7 +12,7 @@ interface UserContextType {
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  const [nome, setNome] = useState<string>("Usuário");
+  const [nome, setNome] = useState<string>("");
 
   useEffect(() => {
     console.log(socket);

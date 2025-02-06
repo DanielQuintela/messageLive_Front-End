@@ -1,34 +1,29 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import ModalCancelConfirm from "../../components/modals/modalCancel";
 import { useUser } from "../../hooks/UserContext";
 
 function Lobby() {
   const navigate = useNavigate();
-  const [showModalCancelConfirm, setShowModalCancelConfirm] = useState<boolean>(false);
   const { nome } = useUser();
-  let acces = 0
-
+  const [acces, setAcces] = useState(0);
+  const validator =localStorage.getItem('nome') === nome
+  
   useEffect(() => {
-    if (acces < 1){
-      toast.success(`Seja Bem-vindo, ${nome}!`);
-      acces++ 
+    if (acces < 1 && nome !== ""){
+      if(validator){
+        toast.success(`Bem-vindo de volta ${nome} !!`);
+      } else {
+        toast.success(`Seja Bem-vindo, ${nome}!`);
+        localStorage.setItem('nome', nome)
+      }
+      setAcces(acces + 1);
     }
-  }, [nome, acces]);
+  }, [nome, acces, validator]);
 
   return (
     <>
-       <header className="flex items-center justify-between p-3 bg-black/75 text-[#D4D4D4]">
-        <button onClick={() => setShowModalCancelConfirm(true)}>
-          <img src="/exit.png" alt="Deslogar" width={20} height={20} className="invert" title="Deslogar" />
-        </button>
-        <div className="text-lg">
-          <span>
-            Olá, <strong> {nome} </strong>
-          </span>
-        </div>
-      </header>
+    
       <div className="flex flex-col items-center justify-center h-screen bg-gray-900 text-white text-center">
         <h1 className="font-bold text-3xl">Bem-vindo ao Lobby, {nome}! 🎉</h1>
         <p className="mt-4 text-lg">Agora você pode interagir com outras pessoas.</p>
@@ -39,13 +34,6 @@ function Lobby() {
           Sair do Lobby
         </button>
       </div>
-      {showModalCancelConfirm && (
-        <ModalCancelConfirm
-          textContent="Deseja sair?"
-          onConfirm={ () => navigate("/")}
-          setShowModalCancelConfirm={setShowModalCancelConfirm}
-        />
-      )}
     </>
   );
 }
