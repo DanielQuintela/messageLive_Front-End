@@ -4,18 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../hooks/UserContext';
 import { toast } from 'react-toastify';
 
-
-
 function Home() {
   const [tela, setTela] = useState<"inicio" | "askName">("inicio");
   const [inputNome, setInputNome] = useState("");
-  const { socket } = useUser();
+  const { nome, socket } = useUser();
   const navigate = useNavigate();
-  const { nome } = useUser();
-
+ 
   const handleToLobby = () =>{
-  
-   
+
     if (inputNome) {
       socket.emit("join", inputNome)
       sessionStorage.setItem('notify', '0')
@@ -28,12 +24,12 @@ function Home() {
     return (
       <>
         
-        <div className="flex flex-col items-center justify-center bg-gray-900 text-white text-center transition-all duration-500 overflow-y-auto h-screen">
+        <div className="flex flex-col items-center justify-center bg-gray-900 text-white text-center transition-all duration-500 overflow-y-auto h-screen px-4">
          
           {tela === "inicio" &&  nome === "" && (
              <div className="opacity-100 transition-opacity duration-500">
               
-              <h1 className="font-bold ">Olá, Seja bem-vindo! </h1>
+              <h1 className="font-bold text-4xl mb-4">Olá, Seja bem-vindo! </h1>
               <p className="mt-4 px-4 text-lg">
                 Aqui você pode conhecer pessoas novas e interagir sempre que quiser alguém para conversar!
               </p>
@@ -65,10 +61,10 @@ function Home() {
             >
                <span className="text-lg">⬅️</span> Voltar
               </button>
-              <h1 className="font-bold text-3xl">Qual é o seu nome?</h1>
+              <h1 className="font-bold text-3xl mb-4">Qual é o seu nome?</h1>
               <input
                 type="text"
-                className="mt-4 p-3 text-black rounded-lg w-64 h-11"
+                className="mt-4 p-3 text-black rounded-lg w-64 h-11 focus:outline-none focus:ring-2 focus:ring-purple-500 hover:ring-4 hover:ring-purple-400 transition-all duration-300"
                 placeholder="Digite seu nome aqui"
                 value={inputNome}
                 onChange={(e) => setInputNome(e.target.value)}
@@ -83,13 +79,16 @@ function Home() {
             </div>
           )}
 
-          { nome !== "" && (
-            <h1 className="text-lg font-semibold text-gray-800 bg-yellow-100 p-4 rounded-lg shadow-md">
-              Olá, <span className="font-bold">{nome}</span>! Você já está logado. Se deseja sair, basta clicar no botão de Logout acima.
-            </h1>
+          {nome !== "" && tela === "inicio" && (
+            <div className="mt-8 p-4 bg-yellow-100 rounded-lg shadow-md max-w-md mx-auto">
+              <h1 className="text-lg font-semibold text-gray-800">
+                Olá, <span className="font-bold">{nome}</span>! Você já está logado.
+              </h1>
+              <p className="text-sm text-gray-600 mt-2">
+                Se deseja alterar seu nome, por favor, faça logout e entre novamente.
+              </p>
+            </div>
           )}
-
-
         </div>
       </>
     );
