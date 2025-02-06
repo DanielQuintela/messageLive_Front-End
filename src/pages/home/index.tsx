@@ -10,6 +10,7 @@ function Home() {
   const [inputNome, setInputNome] = useState("");
   const { socket } = useUser();
   const navigate = useNavigate();
+  const { nome } = useUser();
 
   const handleToLobby = () =>{
   
@@ -27,7 +28,7 @@ function Home() {
         
         <div className="flex flex-col items-center justify-center bg-gray-900 text-white text-center transition-all duration-500 overflow-y-auto h-screen">
          
-          {tela === "inicio" && (
+          {tela === "inicio" &&  nome === "" && (
              <div className="opacity-100 transition-opacity duration-500">
               
               <h1 className="font-bold ">Olá, Seja bem-vindo! </h1>
@@ -79,6 +80,13 @@ function Home() {
               </button>
             </div>
           )}
+
+          { nome !== "" && (
+            <h1 className="text-lg font-semibold text-gray-800 bg-yellow-100 p-4 rounded-lg shadow-md">
+              Olá, <span className="font-bold">{nome}</span>! Você já está logado. Se deseja sair, basta clicar no botão de Logout acima.
+            </h1>
+          )}
+
 
         </div>
       </>
