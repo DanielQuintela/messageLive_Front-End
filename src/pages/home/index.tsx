@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './index.css';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../hooks/UserContext';
+import { toast } from 'react-toastify';
 
 
 
@@ -17,9 +18,10 @@ function Home() {
    
     if (inputNome) {
       socket.emit("join", inputNome)
+      sessionStorage.setItem('notify', '0')
       navigate(`/lobby`);
     } else {
-      alert("Por favor, digite seu nome antes de entrar!"); // Evita que entre sem nome
+      toast.error("Por favor, digite seu nome para poder entrar!"); // Evita que entre sem nome
     }
    
   }
