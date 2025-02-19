@@ -30,7 +30,7 @@ function Home() {
              <div className="opacity-100 transition-opacity duration-500">
               
               <h1 className="font-bold text-4xl mb-4">Olá, Seja bem-vindo! </h1>
-              <p className="mt-4 px-4 text-lg">
+              <p className="mt-4 px-4 text-lg text-gray-300">
                 Aqui você pode conhecer pessoas novas e interagir sempre que quiser alguém para conversar!
               </p>
 
@@ -71,7 +71,7 @@ function Home() {
                 required
               />
               <button
-                className="mt-7 px-4 py-3 h-12 bg-purple-950 hover:bg-purple-900 text-white font-bold rounded-lg transition-all duration-300 text-xl"
+                className="mt-7 px-4 py-3 h-12 bg-purple-700 hover:bg-purple-800 text-white font-bold rounded-lg transition-all duration-300 text-xl shadow-md hover:shadow-lg"
                 onClick={handleToLobby}
               >
                 Entrar no lobby
